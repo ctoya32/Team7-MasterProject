@@ -1,0 +1,39 @@
+//the main project, with buttons and slides and stuff.
+
+function setup() {
+  createCanvas(900, 550);
+  startButton();
+}
+
+function titleScreen(){
+  
+}
+function startButton(){
+  //start button
+  let startButton = createButton('Start Here');
+  startButton.position(350,300);
+  startButton.size(200,80);
+  startButton.style('font-size','30px');
+  //goes to title screen
+  startButton.mousePressed(titleScreen);
+  //removes button
+  startButton.mousePressed(function(){startButton.remove()});
+  
+}
+
+function xButton(){
+  
+  let xButton = createButton('X');
+  xButton.size(25,25)
+  xButton.position(875,0);
+  xButton.style('font-size','14px');
+  //xButton.mousePressed()
+  
+}
+
+
+function draw() {
+  background(120);
+
+}
+  
