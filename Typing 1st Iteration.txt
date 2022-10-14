@@ -1,0 +1,20 @@
+function setup() {
+  createCanvas(900, 550);
+  background(150); 
+ 
+ 
+}
+  
+function draw() {
+  textSize(40)
+  text('Typing Words',340,50);
+  fill(100)
+  rect(210,100,500,150)
+  let words = ['apple', 'bear', 'cat', 'dog'];
+  let word = random(words); 
+  fill(0)
+  textSize(30)
+  text('Please Type the word :" '+ word + '"' ,240,450);
+  
+}
+  
