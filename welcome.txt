@@ -1,0 +1,2 @@
+ textSize(26)
+  text("Welcome To Your Personalized FMS Exercises!",180,120);
