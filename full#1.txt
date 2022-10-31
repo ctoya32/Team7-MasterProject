@@ -1,0 +1,226 @@
+//the main project, with buttons and slides and stuff.
+
+
+
+function setup() {
+  createCanvas(900, 550);
+  startScreen();
+  let typingButton = createButton('Typing Words');
+  
+}
+
+
+
+function startScreen(){
+  
+  startButtonFunction();
+  textSize(32);
+  textFont('Georgia')
+  text('Welcome to your own \npersonalized FMS experience!', 280, 200);
+}
+
+function startButtonFunction(){
+  //start button
+  
+  let startButton = createButton('Start Here');
+  
+  startButton.position(350,300);
+  startButton.size(200,80);
+  startButton.style('font-size','30px');
+  
+  //goes to title screen
+  startButton.mousePressed(function(){
+    startButton.remove();
+    titleScreen();
+  })
+  
+
+  
+}
+function titleScreen(){
+  background(200);
+  //this code gets run when start button is pressed
+  let typingButton = createButton('Typing Words');
+  typingButton.size(160,80);
+  typingButton.position(100, 350)
+  typingButton.style('font-size','24px');
+  //goes to typing game
+
+  
+  textSize(16);
+  textFont('Georgia')
+  text('Using one or more fingers \nto improve Muscle Memory', 80, 480);
+   typingButton.mousePressed(function(){
+    
+  })
+  //just a placeholder image, you can comment out line 54-56 if it's giving you errors
+  let tracingButton = createButton('Tracing Shapes');
+  tracingButton.size(160,80);
+  tracingButton.position(375,350)
+  tracingButton.style('font-size','24px');
+  //goes to tracing game
+  tracingButton.mousePressed(function(){tracingGame()})
+  
+  textSize(16);
+  textFont('Georgia')
+  text('Improves hand-eye coordination \nwithout clicking involved', 350, 480);
+   
+  
+  
+  let circleButton = createButton('Circle Clicking');
+  circleButton.size(160,80);
+  circleButton.position(650,350)
+  circleButton.style('font-size','24px');
+  //goes to circle game
+  circleButton.mousePressed(function(){circleGame()})
+  
+  textSize(16);
+  textFont('Georgia')
+  text('Hand-eye coordination \ntraining with clicking', 650, 480);
+  
+stroke(0)
+  noFill()
+  rect(70,460,210,50,15); //1st box
+  rect(340,460,250,50,15); //2nd box
+  rect(635,460,190,50,15); //3rd box
+  
+  
+  
+  typingButton.mousePressed(function(){
+    clear();
+    typingButton.remove();
+      tracingButton.remove();
+      circleButton.remove();
+    loop();
+      typingGameStart()})
+  
+  tracingButton.mousePressed(function(){ 
+    clear();
+    typingButton.remove();
+      tracingButton.remove();
+      circleButton.remove();
+    loop();
+      tracingGameStart()})
+  
+   circleButton.mousePressed(function(){
+   clear();
+    typingButton.remove();
+      tracingButton.remove();
+      circleButton.remove();
+      loop();
+     circleGameStart()})
+  
+}
+
+
+function xButtonFunction(){
+  
+  let xButton = createButton('X');
+  xButton.size(25,25)
+  xButton.position(875,0);
+  xButton.style('font-size','14px');
+  //xButton.mousePressed()
+  
+}
+
+
+function typingGameStart(){
+  
+  let typingButtonCircle = createButton('Start');
+  
+  typingButtonCircle.position(350,300);
+  typingButtonCircle.size(200,80);
+  typingButtonCircle.style('font-size','30px');
+  
+  //goes to title screen
+  typingButtonCircle.mousePressed(function(){
+    typingButtonCircle.remove();
+    typingGame();
+  })
+  
+}
+//typing game goes here
+function typingGame(){
+   
+  
+}
+
+
+
+
+
+
+function tracingGameStart(){
+  
+  let tracingButtonCircle = createButton('Start');
+  
+  tracingButtonCircle.position(350,300);
+  tracingButtonCircle.size(200,80);
+  tracingButtonCircle.style('font-size','30px');
+  
+  //goes to title screen
+  tracingButtonCircle.mousePressed(function(){
+    tracingButtonCircle.remove();
+    tracingGame();
+  })
+  
+}
+//tracing game goes here
+function tracingGame(){
+
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//circle game goes here
+
+
+
+function circleGameStart(){
+  
+  let startButtonCircle = createButton('Start');
+  
+  startButtonCircle.position(350,300);
+  startButtonCircle.size(200,80);
+  startButtonCircle.style('font-size','30px');
+  
+  //goes to title screen
+  startButtonCircle.mousePressed(function(){
+    startButtonCircle.remove();
+   
+    circleGame();
+  })
+  
+}
+
+
+function circleGame(){
+
+  
+  
+
+  
+  
+  
+  
+}
+
+//I honestly have no idea how draw works in this thing but I don't need to use it so if you need to use it put it in your function I think thats the best solution
+function draw() {
+  noLoop()
+  background(120);
+
+}
+  
