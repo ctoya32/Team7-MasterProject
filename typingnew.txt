@@ -1,0 +1,73 @@
+let word;
+
+function setup() {
+   
+  createCanvas(900, 550);
+  
+  rect(210,150,500,150);
+ 
+  word = random(['apple', 'orange', 'red', 'purple']); 
+  
+  
+    //user input for typing words act
+    input = createInput('');
+    input.position(350, 420);
+    input.size(200);
+  
+ button = createButton('Enter');
+  button.position(input.x + input.width+3, 420);
+  
+  button2 = createButton('Clear');
+  button2.position(input.x + input.width+53, 420);
+  
+  
+   button.mousePressed(compare);
+ button2.mousePressed(draw);
+}
+  
+function draw() {
+  rect(20,20,20,20)
+  noLoop()
+  background(150); 
+  input.position(350, 420);
+    input.size(200);
+  textSize(40)
+   fill(0)
+  text('Typing Words',335,80);
+  fill(100)
+  
+  
+  fill(0)
+  textSize(35)
+  text('Please Type The Word "'+ word + '" Below' ,195,390);
+  textSize(100)
+ 
+    
+}
+
+function compare(){
+  const word2 = input.value();
+  
+   for (let i = 0; i < word.length+1; ++i){
+   if(word2 === word){
+     fill('green')
+     stroke(20)
+     text(word2,240,290)
+       
+   }
+   if(word2 !== word){
+     fill('red')
+     stroke(20)
+     text(word2,240,290)
+   }
+   
+ }
+    
+
+}
+function resetSketch(){
+const word2 = ''
+}
+
+    
+  
