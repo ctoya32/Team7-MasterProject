@@ -1,0 +1,142 @@
+//the main project, with buttons and slides and stuff.
+let radiusCircle = 100;
+let xCircle;
+let yCircle;
+let scoreCircle = 0;
+var screen = 0;
+
+
+function setup() {
+  createCanvas(900, 550);
+  xCircle = random(200, 700);
+  yCircle = random(200,350);
+  
+}
+function draw() {
+  if(screen == 0)
+   titleScreen()
+  else if(screen == 1){
+    typingGame()
+  }
+  else if(screen == 2 ){
+    tracingGame()
+  }
+  else if(screen ==3){
+    circleGame()
+  }
+}
+
+
+
+function titleScreen(){
+  background(200);
+  //this code gets run when start button is pressed
+  let typingButton = createButton('Typing Words');
+  typingButton.size(150,40);
+  typingButton.position(100, 500)
+  typingButton.style('font-size','18px');
+  //goes to typing game
+
+  
+  textSize(16);
+  textFont('Georgia')
+  text('Using one or more fingers \nto improve Muscle Memory', 80, 450);
+  
+  //just a placeholder image, you can comment out line 54-56 if it's giving you errors
+  let tracingButton = createButton('Tracing Shapes');
+  tracingButton.size(150,40);
+  tracingButton.position(375,500)
+  tracingButton.style('font-size','18px');
+  //goes to tracing game
+  
+  textSize(16);
+  textFont('Georgia')
+  text('Improves hand-eye coordination \nwithout clicking involved', 350, 450);
+   
+  
+  
+  let circleButton = createButton('Circle Clicking');
+  circleButton.size(150,40);
+  circleButton.position(650,500)
+  circleButton.style('font-size','18px');
+  //goes to circle game
+  
+  textSize(16);
+  textFont('Georgia')
+  text('Hand-eye coordination \ntraining with clicking', 650, 450);
+  
+stroke(0)
+  noFill()
+  rect(70,430,210,50,15); //1st box
+  rect(340,430,250,50,15); //2nd box
+  rect(635,430,190,50,15); //3rd box
+  
+  
+  
+  typingButton.mousePressed(function(){
+   
+    clear()
+     screen = 1 ;
+      })
+  
+  tracingButton.mousePressed(function(){ 
+    clear()
+  screen =2;
+      })
+  
+   circleButton.mousePressed(function(){
+   clear()
+    screen=3;
+   })
+  
+}
+//typing game goes here
+function typingGame(){
+   
+  
+}
+
+
+
+//tracing game goes here
+function tracingGame(){
+
+
+
+
+}
+
+
+function circleGame(){
+  
+background(22,44,212)
+  
+  fill('green')
+ellipse(xCircle,yCircle,radiusCircle*2, radiusCircle*2);
+  textSize(30);
+  text('Score: ' + scoreCircle,10,30);
+}
+  function mousePressed() {
+  let d = dist(mouseX, mouseY, xCircle ,yCircle);
+  if(d<radiusCircle){
+    newCircle();
+    ++scoreCircle;
+    if(scoreCircle == 10){
+      radiusCircle = radiusCircle/2;
+      
+    }
+    
+  }}
+  
+  
+
+function newCircle(){
+  
+  xCircle = random(200, 700);
+  yCircle = random(200,350);
+ ellipse(xCircle,yCircle,radiusCircle*2, radiusCircle*2);
+  
+  
+}
+
+//I honestly have no idea how draw works in this thing but I don't need to use it so if you need to use it put it in your function I think thats the best solution
