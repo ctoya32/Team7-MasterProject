@@ -1,0 +1,198 @@
+//Rectangle
+let sx;
+let sy;
+let squareSize = 55;
+let overSquare = false;
+let lockedS = false;
+//Circle
+let cx;
+let cy;
+let circleSize = 55;
+let overCircle = false;
+let lockedC = false;
+//Triangle
+let tx;
+let ty;
+let triangleSize = 135;
+let overTriangle = false;
+let lockedT = false;
+
+//timer 
+//note: you can change amount of time here
+let mins = 5;
+let sec = 59;
+
+//Level & Score
+let scoreShape = 0;
+let levelShape = 1;
+
+function setup() {
+  createCanvas(900, 550);
+  // used to center each shape
+   sx = width / 2.0;
+  sy = height / 2.0;
+  cx = width / 2.0;
+  cy = height / 2.0;
+  tx = width / 2.0;
+  ty = height / 2.5;
+  
+}
+function draw () {
+  background(137);
+
+  countdown();
+  //Change level by changing function and stuff.
+  squareLevel();
+  
+
+}
+
+function squareLevel() {
+  rectMode(RADIUS);
+  strokeWeight(4);
+  square(sx, sy, squareSize);
+  textSize(30);
+  text('Score: ' + scoreShape,80,30);
+  textSize(45)
+  text('Level '+ levelShape, 440,50)
+  // to tell if its over the shape
+  if (
+    mouseX > sx - squareSize &&
+    mouseX < sx + squareSize &&
+    mouseY > sy - squareSize &&
+    mouseY < sy + squareSize
+  ) {
+    overSquare = true;
+    if (!lockedS) {
+      stroke(255, 255, 0);
+      fill(100);
+    }
+  } else {
+    stroke(255);
+    fill(100);
+    overSquare = false;
+  }
+}
+
+function circleLevel() {
+  // An ellipse
+  ellipseMode(RADIUS);
+  strokeWeight(4);
+  circle(cx, cy, circleSize);
+  textSize(30);
+  text('Score: ' + scoreShape,80,30);
+  textSize(45)
+  text('Level '+ levelShape, 440,50);
+  
+  if (
+    mouseX > cx - circleSize &&
+    mouseX < cx + circleSize &&
+    mouseY > cy - circleSize &&
+    mouseY < cy + circleSize
+  ) {
+    overCircle = true;
+    if (!lockedC) {
+      stroke(255, 255, 0);
+      fill(100);
+    }
+  } else {
+    stroke(255);
+    fill(100);
+    overCircle = false;
+  }
+}
+
+function triangleLevel() {
+  // A triangle
+  ellipseMode(RADIUS);
+  strokeWeight(4);
+  triangle(tx, ty, 340, 350, 560, 350);
+  textSize(30);
+  text('Score: ' + scoreShape,80,30);
+  textSize(45)
+  text('Level '+ levelShape, 440,50);
+  
+  if (
+    mouseX > tx - triangleSize &&
+    mouseX < tx + triangleSize &&
+    mouseY > ty - triangleSize &&
+    mouseY < ty + triangleSize
+  ) {
+    overTriangle = true;
+    if (!lockedT) {
+      stroke(255, 255, 0);
+      fill(100);
+    }
+  } else {
+    stroke(255);
+    fill(100);
+    overTriangle = false;
+  }
+}
+function mousePressed() {
+  if (overSquare) {
+    lockedS = true;
+    stroke(0, 255, 0)
+    fill(0, 155, 0);
+    
+  } else {
+    lockedS = false;
+  }
+  
+if (overCircle) {
+    lockedC = true;
+    stroke(0, 255, 0)
+    fill(0, 155, 0);
+  } else {
+    lockedC = false;
+  }
+  
+if (overTriangle) {
+    lockedT = true;
+    stroke(0, 255, 0)
+    fill(0, 155, 0);
+  
+  } else {
+    lockedT = false;
+  }
+}
+
+
+function mouseReleased() {
+  lockedS = false;
+  lockedC = false;
+  lockedT = false;
+}
+
+function countdown() {
+  textAlign(CENTER, CENTER);
+  textSize(20);
+  
+  text(mins, 840, 30);
+  text(":", 860, 30)
+  text(sec, 880, 30)
+
+  if (mins > 0 && sec == 0 && frameCount == 1 ) {
+    minute --;
+  } 
+    // for (let i = 60; i < 60; i--){
+    if (mins > 0 && sec == 0 && frameCount % 60 == 0){
+    sec = 60;
+  }
+  if (sec == 60){
+    mins--;
+  }
+  if (sec <= 60 && frameCount % 60 ==0){
+    sec--;
+  }
+  if (mins > 0 && sec == 0 && frameCount % 3600 == 0){
+    minute--;
+  }
+  
+  if (mins == 0 && sec < 0) {
+    background(120)
+    textSize(50)
+    text("GAME OVER", width/2, height/2);
+  }
+  
+}
