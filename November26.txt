@@ -1,0 +1,319 @@
+
+// declaring variables 
+let radiusCircle = 100;
+let xCircle;
+let yCircle;
+let scoreCircle = 0;
+var screen = 0;
+let level =1;
+let livesCircle = 3;
+
+
+function setup() {
+  createCanvas(900, 550);
+  xCircle = random(100, 800);
+  yCircle = random(100,380);
+  
+}
+function draw() {
+  // calling games
+  if(screen == 0)
+   titleScreen()
+  else if(screen == 1){
+    typingGame()
+  }
+  else if(screen == 2 ){
+    tracingGame()
+  }
+  else if(screen ==3){
+    circleGame()
+  }
+  else if(screen == 4){
+    clear()
+    endGame();
+  }
+  else if(screen ==5){
+    clear()
+    CompleteGame()
+}
+}
+
+
+
+function titleScreen(){
+  // runs when program Starts aka home screen
+  // add images that display game
+  // add good background
+  
+  background(100,20,240);
+  fill(0)
+  rect(390,-30,100,55,15)
+  //this code gets run when start button is pressed
+  fill(255)
+  
+
+  
+  let menuButton = createButton('Home');
+  menuButton.size(94,20);
+  menuButton.position(393, 0)
+  menuButton.style('font-size','18px');
+  menuButton.style('background-color', 'black');
+  menuButton.style('color', 'white');
+  
+  let typingButton = createButton('Typing Words');
+  typingButton.size(150,40);
+  typingButton.position(100, 500)
+  typingButton.style('font-size','18px');
+  typingButton.style('background-color', 'black');
+  typingButton.style('color', 'white');
+  //goes to typing game
+
+  
+  textSize(16);
+  textFont('Georgia')
+  text('Using one or more fingers \nto improve Muscle Memory', 80, 450);
+  
+  //just a placeholder image, you can comment out line 54-56 if it's giving you errors
+  let tracingButton = createButton('Shape Matcher');
+  tracingButton.size(150,40);
+  tracingButton.position(375,500)
+  tracingButton.style('font-size','18px');
+  tracingButton.style('background-color', 'black');
+  tracingButton.style('color', 'white');
+  //goes to tracing game
+  
+  textSize(16);
+  textFont('Georgia')
+  text('Improves visual recognition \nof common shapes', 350, 450);
+   
+  
+  
+  let circleButton = createButton('Circle Clicking');
+  circleButton.size(150,40);
+  circleButton.position(650,500)
+  circleButton.style('font-size','18px');
+  circleButton.style('background-color', 'black');
+  circleButton.style('color', 'white');
+  //goes to circle game
+  
+  textSize(16);
+  textFont('Georgia')
+  text('Hand-eye coordination \ntraining with clicking', 650, 450);
+  
+stroke(0)
+  noFill()
+  rect(70,430,210,50,15); //1st box
+  rect(340,430,215,50,15); //2nd box
+  rect(635,430,190,50,15); //3rd box
+  
+  
+ menuButton.mousePressed(function(){
+   clear()
+  screen = 0;
+   
+   
+   
+ })
+  
+  
+  typingButton.mousePressed(function(){
+    clear()
+    typingButton.remove()
+    tracingButton.remove()
+    circleButton.remove()
+     screen = 1 ;
+    
+      })
+  
+  tracingButton.mousePressed(function(){ 
+    clear()
+    typingButton.remove()
+    tracingButton.remove()
+    circleButton.remove()
+    
+  screen =2;
+    
+      })
+  
+   circleButton.mousePressed(function(){
+   clear()
+     typingButton.remove()
+    tracingButton.remove()
+    circleButton.remove()
+         removeElements()
+
+     
+     scoreCircle = 1         //sets score when button is clicked
+     level =1;               //sets  level when button is clicked
+     radiusCircle = 100; //sets radius of circle when button is clicked
+     livesCircle = 4; //sets Lives
+    screen=3;                //calls game screen
+     
+   })
+  
+}
+//typing game goes here
+function typingGame(){
+  
+ 
+  
+  
+}
+
+//tracing game goes here
+function tracingGame(){
+
+
+}
+
+function circleGame(){
+  // add cool background
+ 
+  
+  background(162,220,245)
+  
+  
+  
+   let backCircleButton = createButton('Back');
+  backCircleButton.size(150,40);
+  backCircleButton.position(0,510)
+  backCircleButton.style('font-size','18px');
+  backCircleButton.style('background-color', 'black');
+  backCircleButton.style('color', 'white');
+  
+  let restartCircleButton = createButton('Restart');
+  restartCircleButton.size(150,40);
+  restartCircleButton.position(375,510)
+  restartCircleButton.style('font-size','18px');
+  restartCircleButton.style('background-color', 'black');
+  restartCircleButton.style('color', 'white');
+  
+  
+  
+  backCircleButton.mousePressed(function(){
+   clear()
+     backCircleButton.remove()
+    removeElements()
+    screen = 0;
+  })
+  
+  restartCircleButton.mousePressed(function(){
+   clear()
+     scoreCircle = 1         //sets score when button is clicked
+     level =1;               //sets  level when button is clicked
+     radiusCircle = 100; //sets radius of circle when button is clicked
+     livesCircle = 4; //sets Lives
+    screen=3;                //calls game screen
+     
+   })
+
+    
+  
+   
+
+  fill(230,230,63)
+ellipse(xCircle,yCircle,radiusCircle*2, radiusCircle*2); //starting circle
+  textSize(30);
+  fill(0)
+  text('Score: ' + scoreCircle,10,30); //score display
+  textSize(45)
+  text('Level '+ level, 370,50) //level display
+  textSize(30);
+  
+  text('Lives Left: ' + livesCircle,730,30); //score display
+  // add lives
+  
+
+  
+    
+}
+  function mousePressed() {
+    if(screen == 3){
+  let d = dist(mouseX, mouseY, xCircle ,yCircle);
+  if(d<radiusCircle){
+    //add correct sound
+    newCircle();
+    ++scoreCircle;
+  
+    if(scoreCircle == 10){
+      // add level sound
+     
+      level=2
+      radiusCircle = radiusCircle/2; //decreases radius size
+    }
+      if(scoreCircle == 20){
+        
+        // add level sound
+      level=3
+      
+      radiusCircle = radiusCircle/3; //decreases radius size
+    
+    }
+    if(scoreCircle == 30 ){
+      clear()
+      screen=5;
+    }
+        
+  }
+    else if(livesCircle == 1){
+      clear()
+      screen=4;
+      
+    }
+    else{
+     
+      //add error sound
+      --scoreCircle;
+      --livesCircle;
+    }
+  
+    
+  }
+  
+  }
+  
+
+function newCircle(){
+  
+  xCircle = random(100, 800); // creates new circle x location
+  yCircle = random(120,380); // creates new circle y location
+ ellipse(xCircle,yCircle,radiusCircle*2, radiusCircle*2); //creates new circle
+  
+  
+}
+
+
+function endGame(){
+  
+background(200,0,0);
+  fill(0)
+  fill(0)
+  
+  textSize(100);
+  fill(0);
+  text('Game Over', 200,100,550);
+  textSize(50);
+    text('Try Again', 340, 380,550);
+  textSize(20);
+  text('Click the \'Restart\' Button', 340,450,550);
+
+  
+}
+
+function CompleteGame(){
+  
+background(0,200,0);
+  
+  fill(0)
+  
+  textSize(100);
+  fill(0);
+  text('You Win', 250,100,550);
+  textSize(50);
+    text('Congrats!', 340, 380,550);
+  textSize(20);
+  text('', 310,450,550);
+
+  
+}
+
