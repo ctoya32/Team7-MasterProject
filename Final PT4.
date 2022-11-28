@@ -1,0 +1,972 @@
+let tTestVar = false
+let word;
+let typingLives = 3
+let wordTest = 0
+let typingLevel = 1
+let typingScore = 0
+
+
+// declaring variables 
+let radiusCircle = 100;
+let xCircle;
+let yCircle;
+let scoreCircle = 0;
+var screen = 0;
+let level =1;
+let livesCircle = 3;
+
+let sx;
+let sy;
+let squareSize = 155;
+let overSquare = false;
+let lockedS = false;
+//Circle
+let cx;
+let cy;
+let circleSize = 135;
+let overCircle = false;
+let lockedC = false;
+//Triangle
+let tx;
+let ty;
+let triangleSize = 135;
+let overTriangle = false;
+let lockedT = false;
+//timer 
+//note: you can change amount of time here
+let mins = 01;
+let sec = 30;
+//Level & Score
+let scoreShape = 5;
+let levelShape = 1;
+
+function setup() {
+  createCanvas(900, 550);
+  xCircle = random(100, 800);
+  yCircle = random(100,380);
+  
+  
+    word = random(['blue', 'cat','dog','hat','bug','exit','teal','red','can','dig','pin','walk','nose'])
+
+    //user input for typing words act
+    sx = width / 2.4;
+  sy = height / 2.3;
+  cx = width / 4.0;
+  cy = height / 2.2;
+  tx = width / 1.2;
+  ty = height / 2.5;
+  
+}
+function tInputButton(){
+  input = createInput('');
+  input.position(350, 420);
+  input.size(200);
+  
+ button = createButton('Enter');
+  button.position(input.x + input.width+3, 420);
+  
+   button.mousePressed(compare);
+ 
+   input.position(350, 420);
+    input.size(200);
+}
+function draw() {
+  //me trying to fix input down here
+  
+  if(screen === 1 && tTestVar === false){
+    input = createInput('');
+  input.position(350, 420);
+  input.size(200);
+  
+ button = createButton('Enter');
+  button.position(input.x + input.width+3, 420);
+  
+   button.mousePressed(compare);
+ 
+   input.position(350, 420);
+    input.size(200);
+    tTestVar = true;
+  }
+  
+  
+  
+  
+  
+  // calling games
+  if(screen == 0)
+   titleScreen()
+  else if(screen == 1){
+    typingGame()
+  }
+  else if(screen == 2 ){
+    levelOne();
+    countdown();
+    if (levelShape == 2){
+    levelTwo();
+    countdown();
+    }
+    else if (levelShape == 3){
+      levelThree();
+      countdown();
+    }
+    else if (levelShape == 4) {
+      removeElements()
+      CompleteGameTracing()
+    }
+    else if (levelShape == 5) {
+      levelShape = 1;
+    }
+  }
+  else if(screen ==3){
+    circleGame()
+  }
+  else if(screen == 4){
+    clear()
+    endGame();
+  }
+  else if(screen ==5){
+    clear()
+    CompleteGame()
+}
+  else if(screen ==6){
+    removeElements()
+    typingCompleteLoss()
+  }
+   else if(screen ==7){
+    removeElements()
+    typingCompleteGame()
+}
+}
+
+
+
+function titleScreen(){
+  // runs when program Starts aka home screen
+  // add images that display game
+  // add good background
+  
+  background(106,77,225);
+  fill(0)
+  rect(390,-30,100,55,15)
+  //this code gets run when start button is pressed
+  fill(0)
+  
+
+  
+  let menuButton = createButton('Home');
+  menuButton.size(94,20);
+  menuButton.position(393, 0)
+  menuButton.style('font-size','18px');
+  menuButton.style('background-color', 'black');
+  menuButton.style('color', 'white');
+  
+  let typingButton = createButton('Typing Words');
+  typingButton.size(150,40);
+  typingButton.position(100, 500)
+  typingButton.style('font-size','18px');
+  typingButton.style('background-color', 'black');
+  typingButton.style('color', 'white');
+  //goes to typing game
+  
+  
+  textSize(40)
+  textFont('Georgia')
+  text('Welcome to Your Personalzied FMS Exercises',43,130)
+
+  fill(255)
+  textSize(16);
+  textFont('Georgia')
+  text('Using one or more fingers \nto improve Muscle Memory', 80, 450);
+  
+  //just a placeholder image, you can comment out line 54-56 if it's giving you errors
+  let tracingButton = createButton('Shape Matcher');
+  tracingButton.size(150,40);
+  tracingButton.position(375,500)
+  tracingButton.style('font-size','18px');
+  tracingButton.style('background-color', 'black');
+  tracingButton.style('color', 'white');
+  //goes to tracing game
+  
+  textSize(16);
+  textFont('Georgia')
+  text('Improves visual recognition \nof Small Changes', 350, 450);
+   
+  
+  
+  let circleButton = createButton('Circle Clicking');
+  circleButton.size(150,40);
+  circleButton.position(650,500)
+  circleButton.style('font-size','18px');
+  circleButton.style('background-color', 'black');
+  circleButton.style('color', 'white');
+  //goes to circle game
+  
+  textSize(16);
+  textFont('Georgia')
+  text('Hand-eye coordination \ntraining with clicking', 650, 450);
+  
+stroke(0)
+  noFill()
+  rect(70,430,210,50,15); //1st box
+  rect(340,430,215,50,15); //2nd box
+  rect(635,430,190,50,15); //3rd box
+  
+  
+ menuButton.mousePressed(function(){
+   clear()
+  screen = 0;
+   
+   
+   
+ })
+  
+  
+  typingButton.mousePressed(function(){
+    clear()
+    typingButton.remove()
+    tracingButton.remove()
+    circleButton.remove()
+    removeElements()
+    typingLives = 3
+    wordTest = 0
+   typingLevel = 1
+   typingScore = 0
+     screen = 1 ;
+    
+      })
+  
+  tracingButton.mousePressed(function(){ 
+    clear()
+    typingButton.remove()
+    tracingButton.remove()
+    circleButton.remove()
+    removeElements()
+    overTriangle = false;
+    lockedT = false;
+//timer 
+//note: you can change amount of time here
+mins = 01;
+sec = 30;
+//Level & Score
+scoreShape = 5;
+levelShape = 1;
+    
+    screen =2;
+    
+    
+      })
+  
+   circleButton.mousePressed(function(){
+   clear()
+     typingButton.remove()
+    tracingButton.remove()
+    circleButton.remove()
+         removeElements()
+
+     
+     scoreCircle = 1         //sets score when button is clicked
+     level =1;               //sets  level when button is clicked
+     radiusCircle = 100; //sets radius of circle when button is clicked
+     livesCircle = 4; //sets Lives
+    screen=3;                //calls game screen
+     
+   })
+  
+}
+//typing game goes here
+function typingGame(){
+
+  background(234,194,0); 
+  
+  
+  textSize(40)
+   fill(0)
+  text('Typing Words',335,80);
+  fill(100)
+  
+  
+  fill(0)
+  textSize(35)
+  text('Please Type The Word "'+ word + '" Below' ,(180-typingLevel*8),390);
+  textSize(100)
+  if(typingScore>=0 && typingScore <=5){
+    typingLevel = 1
+  } else if(typingScore>5 && typingScore<=10){
+    typingLevel = 2
+  } else if(typingScore >10){
+    typingLevel = 3
+  }
+  if(typingScore==15){
+    clear()
+      screen=7;
+  }
+  if(typingLives == 0){
+    clear()
+      screen=6;
+  }
+  
+  if(wordTest===1){
+    fill('green')
+
+    quad(270,230,270,250,400,350,400,300)
+    quad(400,300,400,350,650,150,650,130)
+  }
+  if(wordTest===2){
+    fill('red')
+    quad(300,100,270,130,600,330,630,300)
+    quad(270,300,300,330,630,130,600,100)
+  }
+  textSize(20)
+  fill(0)
+  text("Score : " + typingScore, 100,100)
+  text("Lives  : " + typingLives, 100,130)
+  textSize(30)
+  text("Level  : " + typingLevel, 700,115)
+  
+  
+  let backtypingButton = createButton('Back');
+  backtypingButton.size(150,40);
+  backtypingButton.position(0,510)
+  backtypingButton.style('font-size','18px');
+  backtypingButton.style('background-color', 'black');
+  backtypingButton.style('color', 'white');
+  
+  let restarttypingButton = createButton('Restart');
+  restarttypingButton.size(150,40);
+  restarttypingButton.position(375,510)
+  restarttypingButton.style('font-size','18px');
+  restarttypingButton.style('background-color', 'black');
+  restarttypingButton.style('color', 'white');
+  
+  
+  backtypingButton.mousePressed(function(){
+   clear()
+     backtypingButton.remove()
+    removeElements()
+    screen = 0;
+    tTestVar = false
+  })
+  
+  restarttypingButton.mousePressed(function(){
+   clear()
+    typingLives = 3
+    wordTest = 0
+   typingLevel = 1
+   typingScore = 0//sets Lives
+    screen=1;                //calls game screen
+     tTestVar = false
+   })
+
+  }
+  
+function compare(){
+
+  const word2 = input.value();
+  wordTest = 0
+
+
+   if(word2 === word){
+     fill('green')
+     stroke(20)
+     text(word2,240,290)
+     typingScore+=1
+    wordTest = 1
+   }
+   if(word2 !== word){
+     fill('red')
+     stroke(20)
+     text(word2,240,290)
+        wordTest = 2
+     typingLives--
+     if(typingScore>0){
+       typingScore--
+     }
+   }
+       if(typingLevel === 1) {word = random(['blue', 'cat','dog','hat','bug','exit','teal','red','can','dig','pin','walk','nose']); }
+  
+       if (typingLevel === 2) word = random(['level','shoes', 'glasses', 'purple', 'yellow', 'random','massive','handle','backpack','finland','america','teacher','driver','laptop','towel','folder']); 
+       if (typingLevel ===3) word = random(['gargantuan','turquoise','orangutan','computer','equipment','expensive','dispensary','ambiguous','implementation','management','analysis','requirement','reference','baguette','argumentative' ]); 
+ }
+
+function typingCompleteGame(){
+  
+  
+  background(0,200,0);
+  
+  let backtypingButton3 = createButton('Back');
+  backtypingButton3.size(150,40);
+  backtypingButton3.position(0,510)
+  backtypingButton3.style('font-size','18px');
+  backtypingButton3.style('background-color', 'black');
+  backtypingButton3.style('color', 'white');
+  
+  let restarttypingButton3 = createButton('Restart');
+  restarttypingButton3.size(150,40);
+  restarttypingButton3.position(375,510)
+  restarttypingButton3.style('font-size','18px');
+  restarttypingButton3.style('background-color', 'black');
+  restarttypingButton3.style('color', 'white');
+  
+  
+  backtypingButton3.mousePressed(function(){
+   clear()
+     backtypingButton3.remove()
+    removeElements()
+    screen = 0;
+    tTestVar= false
+  })
+  
+  restarttypingButton3.mousePressed(function(){
+   clear()
+    typingLives = 3
+    wordTest = 0
+   typingLevel = 1
+   typingScore = 0//sets Lives
+    screen=1;                //calls game screen
+     tTestVar = false
+   })
+  
+  
+  
+  fill(0)
+  
+  textSize(100);
+  fill(0);
+  text('You Win', 250,100,550);
+  textSize(50);
+    text('Congrats!', 340, 380,550);
+  textSize(20);
+  text('', 310,450,550);
+
+}
+
+function typingCompleteLoss(){
+  
+
+  background(200,0,0);
+  let backtypingButton2 = createButton('Back');
+  backtypingButton2.size(150,40);
+  backtypingButton2.position(0,510)
+  backtypingButton2.style('font-size','18px');
+  backtypingButton2.style('background-color', 'black');
+  backtypingButton2.style('color', 'white');
+  
+  let restarttypingButton2 = createButton('Restart');
+  restarttypingButton2.size(150,40);
+  restarttypingButton2.position(375,510)
+  restarttypingButton2.style('font-size','18px');
+  restarttypingButton2.style('background-color', 'black');
+  restarttypingButton2.style('color', 'white');
+  
+  
+  backtypingButton2.mousePressed(function(){
+   clear()
+     backtypingButton2.remove()
+    removeElements()
+    screen = 0;
+    tTestVar = false
+  })
+  
+  restarttypingButton2.mousePressed(function(){
+   clear()
+    typingLives = 3
+    wordTest = 0
+   typingLevel = 1
+   typingScore = 0//sets Lives
+    screen=1;                //calls game screen
+     tTestVar = false
+   })
+  
+  fill(0)
+  fill(0)
+  
+  textSize(100);
+  fill(0);
+  text('Game Over', 200,100,550);
+  textSize(50);
+    text('Try Again', 340, 380,550);
+  textSize(20);
+  text('Click the \'Restart\' Button', 340,450,550);
+
+  
+}
+    
+
+//tracing game goes here
+function levelOne() {
+  
+  background(150, 10, 150);
+  
+  let backTracingButton = createButton('Back');
+  backTracingButton.size(150,40);
+  backTracingButton.position(0,510)
+  backTracingButton.style('font-size','18px');
+  backTracingButton.style('background-color', 'black');
+  backTracingButton.style('color', 'white');
+  
+  let restartTracingButton = createButton('Restart');
+  restartTracingButton.size(150,40);
+  restartTracingButton.position(375,510)
+  restartTracingButton.style('font-size','18px');
+  restartTracingButton.style('background-color', 'black');
+  restartTracingButton.style('color', 'white');
+  
+  
+  
+  backTracingButton.mousePressed(function(){
+   clear()
+     backTracingButton.remove()
+    
+    removeElements()
+    screen = 0;
+  })
+  
+  restartTracingButton.mousePressed(function(){
+   clear()
+    removeElements()
+     scoreShape = 5         //sets score when button is clicked
+     levelShape = 1;  
+    
+    
+    //sets  level when button is  //sets Lives
+                    //calls game screen
+     
+   })
+  
+  textSize(30);
+  text('Score: ' + scoreShape,10,30);
+  textSize(45)
+  text('Level '+ levelShape, 370,50)
+  textSize(25);
+  text('press the square', 350, 80)
+  
+  square(sx, sy, squareSize);
+  triangle(200, 180, 100, 300, 300, 300);
+  circle(700, 250, 150);
+  
+  if (
+      mouseX > sx - squareSize &&
+      mouseX < sx + squareSize &&
+      mouseY > sy - squareSize &&
+      mouseY < sy + squareSize
+    ) {
+      overSquare = true;
+      if (!lockedS) {
+        stroke(255, 255, 0);
+        fill(100);
+      }
+    } else {
+      stroke(255);
+      fill(100);
+      overSquare = false;
+    } 
+  
+}
+
+function levelTwo() {
+  // An ellipse
+  background(150, 10, 150);
+  
+  let backTracingButton2 = createButton('Back');
+  backTracingButton2.size(150,40);
+  backTracingButton2.position(0,510)
+  backTracingButton2.style('font-size','18px');
+  backTracingButton2.style('background-color', 'black');
+  backTracingButton2.style('color', 'white');
+  
+  let restartTracingButton2 = createButton('Restart');
+  restartTracingButton2.size(150,40);
+  restartTracingButton2.position(375,510)
+  restartTracingButton2.style('font-size','18px');
+  restartTracingButton2.style('background-color', 'black');
+  restartTracingButton2.style('color', 'white');
+  
+  
+  
+  backTracingButton2.mousePressed(function(){
+   clear()
+     backTracingButton2.remove()
+    removeElements()
+    screen = 0;
+  })
+  
+  restartTracingButton2.mousePressed(function(){
+   clear()
+     scoreShape = 5         //sets score when button is clicked
+     levelShape =1;               //sets  level when button is  //sets Lives
+    screen=2;                //calls game screen
+     
+   })
+  
+  textSize(30);
+  text('Score: ' + scoreShape,10,30);
+  textSize(45)
+  text('Level '+ levelShape, 370,50)
+  textSize(25);
+  text('press the circle', 350, 80)
+  
+  circle(cx, cy, circleSize);
+  rect(350, 250, 150, 75);
+  triangle(700, 180, 600, 300, 800, 300);
+  
+  if (
+      mouseX > cx - circleSize &&
+      mouseX < cx + circleSize &&
+      mouseY > cy - circleSize &&
+      mouseY < cy + circleSize
+    ) {
+      overCircle = true;
+      if (!lockedC) {
+        stroke(255, 255, 0);
+        fill(100);
+      }
+    } else {
+      stroke(255);
+      fill(100);
+      overCircle = false;
+    }
+  
+}
+
+function levelThree() {
+  // A triangle
+  background(150, 10, 150);
+  
+  let backTracingButton3 = createButton('Back');
+  backTracingButton3.size(150,40);
+  backTracingButton3.position(0,510)
+  backTracingButton3.style('font-size','18px');
+  backTracingButton3.style('background-color', 'black');
+  backTracingButton3.style('color', 'white');
+  
+  let restartTracingButton3 = createButton('Restart');
+  restartTracingButton3.size(150,40);
+  restartTracingButton3.position(375,510)
+  restartTracingButton3.style('font-size','18px');
+  restartTracingButton3.style('background-color', 'black');
+  restartTracingButton3.style('color', 'white');
+  
+  
+  
+  backTracingButton3.mousePressed(function(){
+   clear()
+     backTracingButton3.remove()
+    removeElements()
+    screen = 0;
+  })
+  
+  restartTracingButton3.mousePressed(function(){
+    clear();
+   removeElements()
+     levelShape=1;
+    screen=2;                //calls game screen
+     
+   })
+  
+  textSize(30);
+  text('Score: ' + scoreShape,10,30);
+  textSize(45)
+  text('Level '+ levelShape, 370,50)
+  textSize(25);
+  text('press the triangle', 350, 80)
+  
+  triangle(tx, ty, 670, 350, 820, 350);
+  circle(200, 250, 80);
+  square(400, 250, 80) 
+  
+  if (
+      mouseX > tx - triangleSize &&
+      mouseX < tx + triangleSize &&
+      mouseY > ty - triangleSize &&
+      mouseY < ty + triangleSize
+    ) {
+      overTriangle = true;
+      if (!lockedT) {
+        stroke(255, 255, 0);
+        fill(100);
+      }
+    } else {
+      stroke(255);
+      fill(100);
+      overTriangle = false;
+    } 
+}
+
+function overShape() {
+  if (levelShape == 1) {
+    // to tell if its over the shape
+    
+  }
+  else if (levelShape == 2) {
+    
+  }
+  else if (levelShape == 3) {
+  }
+}
+
+
+function CompleteGameTracing(){
+      
+      background(0,200,0);
+  
+  fill(0)
+  
+  textSize(100);
+  fill(0);
+  text('You Win', 250,100,550);
+  textSize(50);
+    text('Congrats!', 340, 380,550);
+  textSize(20);
+  text('', 310,450,550);
+      
+      let backTracingButton4 = createButton('Back');
+  backTracingButton4.size(150,40);
+  backTracingButton4.position(0,510)
+  backTracingButton4.style('font-size','18px');
+  backTracingButton4.style('background-color', 'black');
+  backTracingButton4.style('color', 'white');
+  
+  
+  
+  
+  backTracingButton4.mousePressed(function(){
+   clear()
+     backTracingButton4.remove()
+    removeElements()
+    levelShape = 1;
+    screen = 0;
+  })
+  
+  
+    }
+
+
+function circleGame(){
+  // add cool background
+ 
+  
+  background(162,220,245)
+  
+  
+  
+   let backCircleButton = createButton('Back');
+  backCircleButton.size(150,40);
+  backCircleButton.position(0,510)
+  backCircleButton.style('font-size','18px');
+  backCircleButton.style('background-color', 'black');
+  backCircleButton.style('color', 'white');
+  
+  let restartCircleButton = createButton('Restart');
+  restartCircleButton.size(150,40);
+  restartCircleButton.position(375,510)
+  restartCircleButton.style('font-size','18px');
+  restartCircleButton.style('background-color', 'black');
+  restartCircleButton.style('color', 'white');
+  
+  
+  
+  backCircleButton.mousePressed(function(){
+   clear()
+     backCircleButton.remove()
+    removeElements()
+    screen = 0;
+  })
+  
+  restartCircleButton.mousePressed(function(){
+   clear()
+     scoreCircle = 1         //sets score when button is clicked
+     level =1;               //sets  level when button is clicked
+     radiusCircle = 100; //sets radius of circle when button is clicked
+     livesCircle = 4; //sets Lives
+    screen=3;                //calls game screen
+     
+   })
+
+    
+  
+   
+
+  fill(230,230,63)
+ellipse(xCircle,yCircle,radiusCircle*2, radiusCircle*2); //starting circle
+  textSize(30);
+  fill(0)
+  text('Score: ' + scoreCircle,10,30); //score display
+  textSize(45)
+  text('Level '+ level, 370,50) //level display
+  textSize(30);
+  
+  text('Lives Left: ' + livesCircle,730,30); //score display
+  // add lives
+  
+
+  
+    
+}
+  function mousePressed() {
+    if(screen == 3){
+  let d = dist(mouseX, mouseY, xCircle ,yCircle);
+  if(d<radiusCircle){
+    //add correct sound
+    newCircle();
+    ++scoreCircle;
+  
+    if(scoreCircle == 10){
+      // add level sound
+     
+      level=2
+      radiusCircle = radiusCircle/2; //decreases radius size
+    }
+      if(scoreCircle == 20){
+        
+        // add level sound
+      level=3
+      
+      radiusCircle = radiusCircle/3; //decreases radius size
+    
+    }
+    if(scoreCircle == 30 ){
+      clear()
+      screen=5;
+    }
+        
+  }
+    else if(livesCircle == 1){
+      clear()
+      screen=4;
+      
+    }
+    else{
+     
+      //add error sound
+      --scoreCircle;
+      --livesCircle;
+    }
+  
+    
+  }
+  else if (screen == 2) {
+    if (overSquare) {
+    lockedS = true;
+    removeElements();
+    if (levelShape == 1) {
+      scoreShape = scoreShape + 20;
+    }
+    levelShape = 2;
+  }
+  else {
+    lockedS = false;
+    if (levelShape == 1) {
+      scoreShape = scoreShape - 5;
+    }
+  }
+if (overCircle) {
+  lockedC = true;
+  removeElements();
+  if (levelShape == 2) {
+    scoreShape = scoreShape + 20;
+  }
+  levelShape = 3;
+}
+  else {
+    lockedC = false;
+    if (levelShape == 2) {
+      scoreShape = scoreShape - 5;
+    }
+  }
+  
+  if (overTriangle) {
+    lockedT = true;
+    removeElements();
+    levelShape = 4;
+  }
+  else {
+    lockedT = false;
+    if (levelShape == 3) {
+      scoreShape = scoreShape - 5;
+    }
+  }
+  }
+  }
+  
+function mouseReleased() {
+  if (levelShape == 1) {
+    lockedS = false;
+  }
+  else if (levelShape == 2) {
+    lockedC = false;
+  }
+  else if (levelShape == 3) {
+    lockedT = false;
+  }
+}
+
+function countdown() {
+  
+  textSize(20);
+  text(mins, 840, 30);
+  text(":", 860, 30)
+  text(sec, 880, 30)
+  if (mins > 0 && sec == 0 && frameCount == 1 ) {
+    minute --;
+  } 
+    // for (let i = 60; i < 60; i--){
+    if (mins > 0 && sec == 0 && frameCount % 60 == 0){
+    sec = 60;
+  }
+  if (sec == 60){
+    mins--;
+  }
+  if (sec <= 60 && frameCount % 60 ==0){
+    sec--;
+  }
+  if (mins > 0 && sec == 0 && frameCount % 3600 == 0){
+    minute--;
+  }  
+  if (mins == 0 && sec < 0) {
+    endGame()
+  } 
+}
+
+function newCircle(){
+  
+  xCircle = random(100, 800); // creates new circle x location
+  yCircle = random(120,380); // creates new circle y location
+ ellipse(xCircle,yCircle,radiusCircle*2, radiusCircle*2); //creates new circle
+  
+  
+}
+
+
+function endGame(){
+  
+background(200,0,0);
+  fill(0)
+  fill(0)
+  
+  textSize(100);
+  fill(0);
+  text('Game Over', 200,100,550);
+  textSize(50);
+    text('Try Again', 340, 380,550);
+  textSize(20);
+  text('Click the \'Restart\' Button', 340,450,550);
+
+  
+}
+
+function CompleteGame(){
+  
+background(0,200,0);
+  
+  fill(0)
+  
+  textSize(100);
+  fill(0);
+  text('You Win', 250,100,550);
+  textSize(50);
+    text('Congrats!', 340, 380,550);
+  textSize(20);
+  text('', 310,450,550);
+
+  
+}
