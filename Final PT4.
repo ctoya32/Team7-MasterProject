@@ -189,7 +189,7 @@ function titleScreen(){
   
   textSize(16);
   textFont('Georgia')
-  text('Improves visual recognition \nof Small Changes', 350, 450);
+  text('Improves visual recognition \nof Common Shapes', 350, 450);
    
   
   
@@ -726,7 +726,12 @@ function CompleteGameTracing(){
   backTracingButton4.style('background-color', 'black');
   backTracingButton4.style('color', 'white');
   
-  
+  let restartTracingButton4 = createButton('Restart');
+  restartTracingButton4.size(150,40);
+  restartTracingButton4.position(375,510)
+  restartTracingButton4.style('font-size','18px');
+  restartTracingButton4.style('background-color', 'black');
+  restartTracingButton4.style('color', 'white');
   
   
   backTracingButton4.mousePressed(function(){
@@ -736,6 +741,14 @@ function CompleteGameTracing(){
     levelShape = 1;
     screen = 0;
   })
+  
+  restartTracingButton4.mousePressed(function(){
+    clear();
+   removeElements()
+     levelShape=1;
+    screen=2;                //calls game screen
+     
+   })
   
   
     }
