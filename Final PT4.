@@ -534,6 +534,8 @@ function levelOne() {
    })
   
   textSize(30);
+  fill(0);
+  stroke(0);
   text('Score: ' + scoreShape,10,30);
   textSize(45)
   text('Level '+ levelShape, 370,50)
@@ -552,12 +554,12 @@ function levelOne() {
     ) {
       overSquare = true;
       if (!lockedS) {
-        stroke(255, 255, 0);
-        fill(100);
+        stroke(0);
+        fill(0);
       }
     } else {
-      stroke(255);
-      fill(100);
+      stroke(0);
+      fill(0);
       overSquare = false;
     } 
   
@@ -617,12 +619,12 @@ function levelTwo() {
     ) {
       overCircle = true;
       if (!lockedC) {
-        stroke(255, 255, 0);
-        fill(100);
+        stroke(0);
+        fill(0);
       }
     } else {
-      stroke(255);
-      fill(100);
+      stroke(0);
+      fill(00);
       overCircle = false;
     }
   
@@ -914,7 +916,8 @@ function mouseReleased() {
 }
 
 function countdown() {
-  
+  fill(0)
+  stroke(0)
   textSize(20);
   text(mins, 840, 30);
   text(":", 860, 30)
